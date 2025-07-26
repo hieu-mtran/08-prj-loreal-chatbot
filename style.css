@@ -5,12 +5,25 @@
   padding: 0;
 }
 
+/* —— L'Oréal brand colors —— */
+:root {
+  --loreal-black: #000000;
+  --loreal-white: #ffffff;
+  --loreal-red: #ff003b;
+  --loreal-gold: #e3a535;
+  --loreal-light-gray: #fafafa;
+  --loreal-dark-gray: #666666;
+  --loreal-border: #ccc;
+}
+
 /* —— body + fonts —— */
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  color: var(--loreal-black);
   display: flex;
   justify-content: center;
+  background: linear-gradient(135deg, var(--loreal-light-gray) 0%, var(--loreal-white) 100%);
+  min-height: 100vh;
 }
 
 .page-wrapper {
@@ -21,13 +34,34 @@ body {
 /* header */
 .site-header {
   text-align: center;
-  padding-top: 50px;
+  background: linear-gradient(45deg, var(--loreal-black), var(--loreal-red));
+  color: var(--loreal-white);
+  padding: 40px 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+  filter: brightness(0) invert(1); /* Makes the logo white */
 }
 
 .site-title {
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 28px;
+  font-weight: 700;
   margin-bottom: 10px;
+  color: var(--loreal-white);
+}
+
+.site-tagline {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--loreal-gold);
+  font-style: italic;
 }
 
 /* chat window */
@@ -37,27 +71,53 @@ body {
 
 .chat-window {
   height: 360px;
-  border: 1px solid #000;
+  border: 2px solid var(--loreal-red);
   padding: 20px;
   font-size: 18px;
   line-height: 1.5;
   overflow-y: auto;
-  background: #fafafa;
+  background: var(--loreal-white);
   white-space: pre-line;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(255, 80, 88, 0.1);
 }
 
 /* messages */
 .msg {
   margin-bottom: 14px;
   line-height: 1.5;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .msg.user {
-  color: #000;
+  color: var(--loreal-white);
+  background: linear-gradient(135deg, var(--loreal-red), #ff7a80);
+  margin-left: 20%;
 }
 
 .msg.ai {
-  color: #666666;
+  color: var(--loreal-black);
+  background: var(--loreal-light-gray);
+  border-left: 4px solid var(--loreal-gold);
+  margin-right: 20%;
+}
+
+.msg.typing {
+  opacity: 0.7;
+  font-style: italic;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.msg.error {
+  background: #ffe6e6;
+  border-left: 4px solid #ff4444;
+  color: #cc0000;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
 }
 
 /* input row */
@@ -70,19 +130,22 @@ body {
 .chat-form input {
   flex: 1;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 2px solid var(--loreal-border);
   font-size: 18px;
+  border-radius: 8px;
+  transition: border-color 0.3s;
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+  outline: none;
+  border-color: var(--loreal-red);
+  box-shadow: 0 0 0 3px rgba(255, 80, 88, 0.1);
 }
 
 .chat-form button {
   font-size: 18px;
-  background: #000;
-  color: #fff;
+  background: linear-gradient(135deg, var(--loreal-red), #ff7a80);
+  color: var(--loreal-white);
   border: none;
   padding: 12px;
   width: 48px;
@@ -91,7 +154,9 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(255, 80, 88, 0.3);
 }
 
 .chat-form button .material-icons {
@@ -99,12 +164,14 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: linear-gradient(135deg, #e6454c, var(--loreal-red));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 80, 88, 0.4);
 }
 
 .chat-form button:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 80, 88, 0.3);
 }
 
 /* visually hidden */
@@ -125,7 +192,10 @@ body {
   margin: 60px 0 40px;
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color: var(--loreal-dark-gray);
+  background: var(--loreal-light-gray);
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .site-footer nav {
@@ -134,10 +204,13 @@ body {
 
 .site-footer a {
   margin: 0 8px;
-  color: #000;
+  color: var(--loreal-red);
   text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: var(--loreal-black);
+  text-decoration: underline;
 }
